@@ -1,4 +1,4 @@
-import { Alert } from 'react-native';
+import { showMessage } from 'react-native-flash-message';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import api from '~/services/api';
@@ -18,14 +18,19 @@ export function* updateProfile({ payload }: UpdateProfileRequestAction) {
 
     const response = yield call(api.put, 'users', profile);
 
-    Alert.alert('Sucesso!', 'Perfil atualizado com sucesso!');
+    showMessage({
+      message: 'Sucesso!',
+      description: 'Perfil atualizado com sucesso',
+      type: 'success',
+    });
 
     yield put(updateProfileSuccess(response.data));
   } catch (err) {
-    Alert.alert(
-      'Falha na atualização',
-      'Houve um erro na atualização do perfil',
-    );
+    showMessage({
+      message: 'Falha na atualização',
+      description: 'Houve um erro na atualização do perfil',
+      type: 'danger',
+    });
     yield put(updateProfileFailure());
   }
 }

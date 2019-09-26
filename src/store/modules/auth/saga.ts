@@ -1,4 +1,4 @@
-import { Alert } from 'react-native';
+import { showMessage } from 'react-native-flash-message';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import api from '~/services/api';
@@ -29,10 +29,11 @@ export function* signIn({ payload }: SignInRequestAction) {
 
     yield put(signInSuccess(token, user));
   } catch (error) {
-    Alert.alert(
-      'Falha na autenticação',
-      'Houve um erro no login, verifique seus dados',
-    );
+    showMessage({
+      message: 'Falha na autenticação',
+      description: 'Houve um erro no login, verifique seus dados',
+      type: 'danger',
+    });
     yield put(signFailure());
   }
 }
@@ -43,11 +44,19 @@ export function* signUp({ payload }: SignUpRequestAction) {
 
     yield call(api.post, 'users', { name, email, password });
 
-    Alert.alert('Parabéns!', 'Usuário cadastrado com sucesso!');
+    showMessage({
+      message: 'Parabéns!',
+      description: 'Usuário cadastrado com sucesso',
+      type: 'success',
+    });
 
     NavigationService.navigate('SignIn');
   } catch (error) {
-    Alert.alert('Falha no cadastro', 'Houve um erro no cadastro');
+    showMessage({
+      message: 'Falha no cadastro',
+      description: 'Houve um erro no cadastro',
+      type: 'danger',
+    });
     yield put(signFailure());
   }
 }
