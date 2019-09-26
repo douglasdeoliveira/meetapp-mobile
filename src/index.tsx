@@ -1,14 +1,19 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { StatusBar } from 'react-native';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
-import Background from '~/components/Background';
+import './config/ReactotronConfig';
+import App from './App';
+import { persistor, store } from './store';
 
-// import { Container } from './styles';
-
-export default function src() {
+export default function Index() {
   return (
-    <Background>
-      <Text>Douglas de Oliveira, o mais foda!</Text>
-    </Background>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+        <StatusBar barStyle="light-content" backgroundColor="#22202C" />
+        <App />
+      </PersistGate>
+    </Provider>
   );
 }

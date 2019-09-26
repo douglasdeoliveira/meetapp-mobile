@@ -1,3 +1,4 @@
+import { TextInputProps } from 'react-native';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -9,7 +10,7 @@ export const Container = styled.View`
   border-radius: 4px;
 `;
 
-export const TInput = styled.TextInput.attrs({
+export const TInput = styled.TextInput.attrs<TextInputProps>({
   placeholderTextColor: 'rgba(255,255,255,0.8)',
 })`
   flex: 1;

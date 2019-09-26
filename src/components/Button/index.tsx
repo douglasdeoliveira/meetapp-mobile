@@ -1,9 +1,10 @@
 import React from 'react';
 import { ActivityIndicator } from 'react-native';
+import { RectButtonProperties } from 'react-native-gesture-handler';
 
 import { Container, Text } from './styles';
 
-interface DefaultButton {
+interface DefaultButton extends RectButtonProperties {
   children: string;
   loading: boolean;
 }

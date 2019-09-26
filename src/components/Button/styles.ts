@@ -5,12 +5,11 @@ export const Container = styled(RectButton)`
   align-items: center;
   justify-content: center;
   height: 46px;
-  background: #3b9eff;
+  background: #f94d6a;
   border-radius: 4px;
 `;
 
 export const Text = styled.Text`
   color: #fff;
-  font-weight: bold;
-  font-size: 16px;
+  font-size: 18px;
 `;
