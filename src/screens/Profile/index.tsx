@@ -7,7 +7,7 @@ import { ApplicationState } from '~/store';
 import { signOut } from '~/store/modules/auth/actions';
 import { updateProfileRequest } from '~/store/modules/user/actions';
 
-import { Container, Form, FormInput, LogoutButton, Separator, SubmitButton, Title } from './styles';
+import { Container, Form, FormInput, LogoutButton, Separator, SubmitButton } from './styles';
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -50,8 +50,6 @@ export default function Profile() {
   return (
     <Background>
       <Container>
-        <Title>Meu perfil</Title>
-
         <Form>
           <FormInput
             icon="person-outline"
@@ -118,7 +116,7 @@ export default function Profile() {
 
 Profile.navigationOptions = {
   tabBarLabel: 'Meu perfil',
-  tabBarIcon: ({ tintColor }) => (
+  tabBarIcon: ({ tintColor }: any) => (
     <Icon name="person" size={20} color={tintColor} />
   ),
 };

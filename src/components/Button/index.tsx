@@ -6,7 +6,7 @@ import { Container, Text } from './styles';
 
 interface DefaultButton extends RectButtonProperties {
   children: string;
-  loading: boolean;
+  loading?: boolean;
 }
 
 export default function Button({

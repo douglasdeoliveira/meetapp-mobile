@@ -8,7 +8,7 @@ import api from '~/services/api';
 
 import { Container, List } from './styles';
 
-function Meetups({ isFocused }: any) {
+function Subscriptions({ isFocused }: any) {
   const [meetups, setMeetups] = useState([]);
 
   useEffect(() => {
@@ -18,13 +18,13 @@ function Meetups({ isFocused }: any) {
   }, [isFocused]);
 
   async function loadAppointments() {
-    const response = await api.get('/meetups');
+    const response = await api.get('/subscriptions');
 
     setMeetups(response.data);
   }
 
   async function handleSubscribe(id: number) {
-    await api.post(`/meetups/${id}/subscriptions/`);
+    await api.delete(`/meetups/${id}/subscriptions/`);
   }
 
   return (
@@ -36,8 +36,8 @@ function Meetups({ isFocused }: any) {
           keyExtractor={(item: any) => String(item.id)}
           renderItem={({ item }: any) => (
             <MeetupCard
-              text="Realizar inscrição"
-              data={item}
+              text="Cancelar inscrição"
+              data={item.Meetup}
               onSubscribe={() => handleSubscribe(item.id)}
             />
           )}
@@ -47,11 +47,11 @@ function Meetups({ isFocused }: any) {
   );
 }
 
-Meetups.navigationOptions = {
-  tabBarLabel: 'Meetups',
+Subscriptions.navigationOptions = {
+  tabBarLabel: 'Inscrições',
   tabBarIcon: ({ tintColor }: any) => (
-    <Icon name="format-list-bulleted" size={20} color={tintColor} />
+    <Icon name="local-offer" size={20} color={tintColor} />
   ),
 };
 
-export default withNavigationFocus(Meetups);
+export default withNavigationFocus(Subscriptions);
