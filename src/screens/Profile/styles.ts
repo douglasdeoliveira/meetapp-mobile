@@ -5,6 +5,7 @@ import Input from '~/components/Input';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
+  margin-top: 65px;
 `;
 
 export const Form = styled.ScrollView.attrs({

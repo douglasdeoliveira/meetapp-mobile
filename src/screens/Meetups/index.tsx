@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { showMessage } from 'react-native-flash-message';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { withNavigationFocus } from 'react-navigation';
 
@@ -24,13 +25,26 @@ function Meetups({ isFocused }: any) {
   }
 
   async function handleSubscribe(id: number) {
-    await api.post(`/meetups/${id}/subscriptions/`);
+    try {
+      await api.post(`/meetups/${id}/subscriptions/`);
+
+      showMessage({
+        message: 'Parabéns!',
+        description: 'Inscrição realizada com sucesso',
+        type: 'success',
+      });
+    } catch (error) {
+      console.tron.log(error);
+      showMessage({
+        message: 'Erro!',
+        type: 'danger',
+      });
+    }
   }
 
   return (
     <Background>
       <Container>
-        {/* <Title>Meu perfil</Title> */}
         <List
           data={meetups}
           keyExtractor={(item: any) => String(item.id)}

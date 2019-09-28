@@ -30,7 +30,6 @@ function Subscriptions({ isFocused }: any) {
   return (
     <Background>
       <Container>
-        {/* <Title>Meu perfil</Title> */}
         <List
           data={meetups}
           keyExtractor={(item: any) => String(item.id)}

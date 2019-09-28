@@ -16,6 +16,10 @@ interface Meetup {
     name: string;
     email: string;
   };
+  file: {
+    url: string;
+    path: string;
+  };
 }
 
 interface Cards {
@@ -33,9 +37,7 @@ export default function MeetupCard({ text, data, onSubscribe }: Cards) {
 
   return (
     <Card>
-      <MeetupImage
-        source={{ uri: `https://api.adorable.io/avatar/100/asdasd.png` }}
-      />
+      <MeetupImage source={{ uri: data.file.url }} />
       <MeetupContent>
         <MeetupTitle>{data.title}</MeetupTitle>
         <InfoItem>
