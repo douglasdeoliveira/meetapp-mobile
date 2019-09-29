@@ -8,26 +8,9 @@ import DatePicker from '~/components/DatePicker';
 import MeetupCard from '~/components/MeetupCard';
 import api from '~/services/api';
 import { ApplicationState } from '~/store';
+import { Meetup } from '~/types/meetup';
 
 import { Container, List, SubscribeButton, WarnText } from './styles';
-
-interface Meetup {
-  id: number;
-  title: string;
-  description: string;
-  location: string;
-  date: string;
-  past: boolean;
-  user: {
-    id: number;
-    name: string;
-    email: string;
-  };
-  file: {
-    url: string;
-    path: string;
-  };
-}
 
 export default function Meetups() {
   const profile = useSelector((state: ApplicationState) => state.user.profile);

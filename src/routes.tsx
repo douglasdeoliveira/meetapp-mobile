@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import Header from '~/components/Header';
+import MeetupDetail from '~/screens/MeetupDetail';
 import Meetups from '~/screens/Meetups';
 import Profile from '~/screens/Profile';
 import SignIn from '~/screens/SignIn';
@@ -38,11 +39,17 @@ export default (isSigned = false) =>
                 },
               },
             ),
+            MeetupDetail,
           },
           {
             defaultNavigationOptions: () => ({
               headerTransparent: true,
+              headerTintColor: '#fff',
               headerTitle: () => <Header />,
+              headerLeftContainerStyle: {
+                height: 60,
+                backgroundColor: 'rgba(0,0,0,0.3)',
+              },
             }),
           },
         ),

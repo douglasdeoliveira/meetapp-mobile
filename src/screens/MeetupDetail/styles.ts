@@ -1,9 +1,8 @@
 import styled from 'styled-components/native';
 
-export const Card = styled.View`
-  background: #fff;
-  border-radius: 4px;
-  margin-bottom: 20px;
+export const Container = styled.ScrollView`
+  flex: 1;
+  margin-top: 65px;
 `;
 
 export const MeetupImage = styled.Image.attrs({
@@ -11,8 +10,6 @@ export const MeetupImage = styled.Image.attrs({
 })`
   width: 100%;
   height: 150px;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
 `;
 
 export const MeetupContent = styled.View`
@@ -21,7 +18,15 @@ export const MeetupContent = styled.View`
 
 export const MeetupTitle = styled.Text`
   font-size: 22px;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
+  color: #fff;
+  font-weight: bold;
+`;
+
+export const Description = styled.Text`
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 25px;
 `;
 
 export const InfoItem = styled.View`
@@ -33,6 +38,6 @@ export const InfoItem = styled.View`
 
 export const InfoText = styled.Text`
   font-size: 18px;
-  color: #999999;
   margin-left: 15px;
+  color: #999;
 `;

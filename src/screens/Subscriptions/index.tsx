@@ -7,25 +7,9 @@ import { withNavigationFocus } from 'react-navigation';
 import Background from '~/components/Background';
 import MeetupCard from '~/components/MeetupCard';
 import api from '~/services/api';
+import { Meetup } from '~/types/meetup';
 
 import { Container, List, UnsubscribeButton, WarnText } from './styles';
-
-interface Meetup {
-  id: number;
-  title: string;
-  description: string;
-  location: string;
-  date: string;
-  user: {
-    id: number;
-    name: string;
-    email: string;
-  };
-  file: {
-    url: string;
-    path: string;
-  };
-}
 
 function Subscriptions({ isFocused }: any) {
   const [meetups, setMeetups] = useState([]);

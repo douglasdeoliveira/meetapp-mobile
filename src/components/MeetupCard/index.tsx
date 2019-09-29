@@ -1,26 +1,13 @@
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import React, { useMemo } from 'react';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { Card, InfoItem, InfoText, MeetupContent, MeetupImage, MeetupTitle } from './styles';
+import NavigationService from '~/services/navigation';
+import { Meetup } from '~/types/meetup';
 
-interface Meetup {
-  id: number;
-  title: string;
-  description: string;
-  location: string;
-  date: string;
-  user: {
-    id: number;
-    name: string;
-    email: string;
-  };
-  file: {
-    url: string;
-    path: string;
-  };
-}
+import { Card, InfoItem, InfoText, MeetupContent, MeetupImage, MeetupTitle } from './styles';
 
 interface Cards {
   meetup: Meetup;
@@ -34,9 +21,19 @@ export default function MeetupCard({ meetup, children }: Cards) {
     });
   }, [meetup.date]);
 
+  function navigate() {
+    NavigationService.navigate('MeetupDetail', {
+      meetup,
+      dateParsed,
+      children,
+    });
+  }
+
   return (
     <Card>
-      <MeetupImage source={{ uri: meetup.file.url }} />
+      <TouchableOpacity onPress={navigate}>
+        <MeetupImage source={{ uri: meetup.file.url }} />
+      </TouchableOpacity>
       <MeetupContent>
         <MeetupTitle>{meetup.title}</MeetupTitle>
         <InfoItem>
