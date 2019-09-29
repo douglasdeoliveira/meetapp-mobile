@@ -3,7 +3,7 @@ import pt from 'date-fns/locale/pt';
 import React, { useMemo } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { ActionButton, Card, InfoItem, InfoText, MeetupContent, MeetupImage, MeetupTitle } from './styles';
+import { Card, InfoItem, InfoText, MeetupContent, MeetupImage, MeetupTitle } from './styles';
 
 interface Meetup {
   id: number;
@@ -23,36 +23,36 @@ interface Meetup {
 }
 
 interface Cards {
-  text: string;
-  data: Meetup;
-  onSubscribe(): void;
+  meetup: Meetup;
+  children?: any;
 }
 
-export default function MeetupCard({ text, data, onSubscribe }: Cards) {
+export default function MeetupCard({ meetup, children }: Cards) {
   const dateParsed = useMemo(() => {
-    return format(parseISO(data.date), "dd 'de' MMMM', às' HH'h' ", {
+    return format(parseISO(meetup.date), "dd 'de' MMMM', às' HH'h' ", {
       locale: pt,
     });
-  }, [data.date]);
+  }, [meetup.date]);
 
   return (
     <Card>
-      <MeetupImage source={{ uri: data.file.url }} />
+      <MeetupImage source={{ uri: meetup.file.url }} />
       <MeetupContent>
-        <MeetupTitle>{data.title}</MeetupTitle>
+        <MeetupTitle>{meetup.title}</MeetupTitle>
         <InfoItem>
           <Icon name="event" size={20} />
           <InfoText>{dateParsed}</InfoText>
         </InfoItem>
         <InfoItem>
           <Icon name="place" size={20} />
-          <InfoText>{data.location}</InfoText>
+          <InfoText>{meetup.location}</InfoText>
         </InfoItem>
         <InfoItem>
           <Icon name="person" size={20} />
-          <InfoText>{data.user.name}</InfoText>
+          <InfoText>{meetup.user.name}</InfoText>
         </InfoItem>
-        <ActionButton onPress={onSubscribe}>{text}</ActionButton>
+
+        {children}
       </MeetupContent>
     </Card>
   );

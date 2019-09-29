@@ -1,32 +1,66 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { showMessage } from 'react-native-flash-message';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { withNavigationFocus } from 'react-navigation';
+import { useSelector } from 'react-redux';
 
 import Background from '~/components/Background';
+import DatePicker from '~/components/DatePicker';
 import MeetupCard from '~/components/MeetupCard';
 import api from '~/services/api';
+import { ApplicationState } from '~/store';
 
-import { Container, List } from './styles';
+import { Container, List, SubscribeButton, WarnText } from './styles';
 
-function Meetups({ isFocused }: any) {
-  const [meetups, setMeetups] = useState([]);
+interface Meetup {
+  id: number;
+  title: string;
+  description: string;
+  location: string;
+  date: string;
+  past: boolean;
+  user: {
+    id: number;
+    name: string;
+    email: string;
+  };
+  file: {
+    url: string;
+    path: string;
+  };
+}
 
-  useEffect(() => {
-    if (isFocused) {
-      loadAppointments();
+export default function Meetups() {
+  const profile = useSelector((state: ApplicationState) => state.user.profile);
+
+  const [currentPage, setPage] = useState<number>(1);
+  const [currentDate, setDate] = useState<Date>(new Date());
+  const [meetups, setMeetups] = useState<Meetup[]>([]);
+  const [isSubscribing, setIsSubscribing] = useState<boolean>(false);
+
+  async function loadMeetups(date: Date, page = 1) {
+    const response = await api.get('/meetups', {
+      params: { date, page },
+    });
+
+    if (date === currentDate) {
+      if (response.data.length <= 0) {
+        return;
+      }
+
+      setPage(page);
+      setMeetups([...meetups, ...response.data]);
+    } else {
+      setPage(1);
+      setDate(date);
+      setMeetups(response.data);
     }
-  }, [isFocused]);
-
-  async function loadAppointments() {
-    const response = await api.get('/meetups');
-
-    setMeetups(response.data);
   }
 
-  async function handleSubscribe(id: number) {
+  async function handleSubscription(id: number) {
     try {
-      await api.post(`/meetups/${id}/subscriptions/`);
+      setIsSubscribing(true);
+
+      await api.post(`/meetups/${id}/subscriptions`);
 
       showMessage({
         message: 'Parabéns!',
@@ -34,28 +68,55 @@ function Meetups({ isFocused }: any) {
         type: 'success',
       });
     } catch (error) {
-      console.tron.log(error);
       showMessage({
         message: 'Erro!',
         type: 'danger',
       });
+    } finally {
+      setIsSubscribing(false);
     }
+  }
+
+  function loadMore() {
+    const nextPage = currentPage + 1;
+
+    loadMeetups(currentDate, nextPage);
+  }
+
+  function canSubscribe(meetup: Meetup) {
+    const isOwner = meetup.user.id === profile.id;
+
+    return !(isOwner || meetup.past);
   }
 
   return (
     <Background>
       <Container>
-        <List
-          data={meetups}
-          keyExtractor={(item: any) => String(item.id)}
-          renderItem={({ item }: any) => (
-            <MeetupCard
-              text="Realizar inscrição"
-              data={item}
-              onSubscribe={() => handleSubscribe(item.id)}
-            />
-          )}
-        />
+        <DatePicker onChangeDate={(date: Date) => loadMeetups(date)} />
+
+        {meetups.length > 0 ? (
+          <List
+            data={meetups}
+            onEndReachedThreshold={0.2}
+            onEndReached={loadMore}
+            keyExtractor={(item: any) => String(item.id)}
+            renderItem={({ item }: any) => (
+              <MeetupCard meetup={item}>
+                {canSubscribe(item) ? (
+                  <SubscribeButton
+                    loading={isSubscribing}
+                    onPress={() => handleSubscription(item.id)}>
+                    Realizar inscrição
+                  </SubscribeButton>
+                ) : (
+                  <></>
+                )}
+              </MeetupCard>
+            )}
+          />
+        ) : (
+          <WarnText>Nenhum meetup encontrado para esta data</WarnText>
+        )}
       </Container>
     </Background>
   );
@@ -67,5 +128,3 @@ Meetups.navigationOptions = {
     <Icon name="format-list-bulleted" size={20} color={tintColor} />
   ),
 };
-
-export default withNavigationFocus(Meetups);
