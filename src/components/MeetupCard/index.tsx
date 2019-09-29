@@ -1,5 +1,5 @@
 import { format, parseISO } from 'date-fns';
-import pt from 'date-fns/locale/pt';
+import locale from 'date-fns/locale/pt-BR';
 import React, { useMemo } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -9,15 +9,15 @@ import { Meetup } from '~/types/meetup';
 
 import { Card, InfoItem, InfoText, MeetupContent, MeetupImage, MeetupTitle } from './styles';
 
-interface Cards {
+interface CardContent {
   meetup: Meetup;
   children?: any;
 }
 
-export default function MeetupCard({ meetup, children }: Cards) {
+export default function MeetupCard({ meetup, children }: CardContent) {
   const dateParsed = useMemo(() => {
     return format(parseISO(meetup.date), "dd 'de' MMMM', às' HH'h' ", {
-      locale: pt,
+      locale,
     });
   }, [meetup.date]);
 

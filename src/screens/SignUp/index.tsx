@@ -16,9 +16,9 @@ export default function SignUp({ navigation }: NavigationSwitchScreenProps) {
   const emailRef: any = useRef();
   const passwordRef: any = useRef();
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   const loading = useSelector((state: ApplicationState) => state.auth.loading);
 

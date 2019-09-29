@@ -19,11 +19,11 @@ export default function Profile() {
   const passwordRef: any = useRef();
   const confirmPasswordRef: any = useRef();
 
-  const [name, setName] = useState(profile.name);
-  const [email, setEmail] = useState(profile.email);
-  const [oldPassword, setOldPassword] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState<string>(profile.name);
+  const [email, setEmail] = useState<string>(profile.email);
+  const [oldPassword, setOldPassword] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
 
   useEffect(() => {
     setOldPassword('');

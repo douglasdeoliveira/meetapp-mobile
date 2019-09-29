@@ -1,12 +1,15 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { NavigationStackScreenProps } from 'react-navigation-stack';
 
 import Background from '~/components/Background';
 import { Meetup } from '~/types/meetup';
 
 import { Container, Description, InfoItem, InfoText, MeetupContent, MeetupImage, MeetupTitle } from './styles';
 
-export default function MeetupDetail({ navigation }: any) {
+export default function MeetupDetail({
+  navigation,
+}: NavigationStackScreenProps) {
   const meetup: Meetup = navigation.getParam('meetup');
   const dateParsed: Date = navigation.getParam('dateParsed');
   const children: any = navigation.getParam('children');

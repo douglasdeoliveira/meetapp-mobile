@@ -14,8 +14,8 @@ export default function SignIn({ navigation }: NavigationSwitchScreenProps) {
   const passwordRef: any = useRef();
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   const loading = useSelector((state: ApplicationState) => state.auth.loading);
 
