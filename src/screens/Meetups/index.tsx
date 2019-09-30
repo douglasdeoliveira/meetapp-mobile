@@ -45,6 +45,8 @@ export default function Meetups() {
 
       await api.post(`/meetups/${id}/subscriptions`);
 
+      setMeetups(meetups.filter(m => m.id !== id));
+
       showMessage({
         message: 'Parabéns!',
         description: 'Inscrição realizada com sucesso',
