@@ -12,7 +12,7 @@ import { Meetup } from '~/types/meetup';
 import { Container, List, UnsubscribeButton, WarnText } from './styles';
 
 function Subscriptions({ isFocused }: any) {
-  const [meetups, setMeetups] = useState([]);
+  const [meetups, setMeetups] = useState<Meetup[]>([]);
   const [isUnsubscribing, setIsUnsubscribing] = useState<boolean>(false);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ function Subscriptions({ isFocused }: any) {
       setIsUnsubscribing(true);
 
       await api.delete(`/subscriptions/${id}`);
-      loadSubscriptions();
+      setMeetups(meetups.filter(m => m.id !== id));
 
       showMessage({
         message: 'Inscrição cancelada com sucesso',
@@ -60,8 +60,8 @@ function Subscriptions({ isFocused }: any) {
             data={meetups}
             keyExtractor={(item: any) => String(item.id)}
             renderItem={({ item }: any) => (
-              <MeetupCard meetup={item.Meetup}>
-                {canUnsubscribe(item.Meetup) ? (
+              <MeetupCard meetup={item.meetup}>
+                {canUnsubscribe(item.meetup) ? (
                   <UnsubscribeButton
                     loading={isUnsubscribing}
                     onPress={() => handleUnsubscripe(item.id)}>
@@ -74,7 +74,7 @@ function Subscriptions({ isFocused }: any) {
             )}
           />
         ) : (
-          <WarnText>Você não está inscrito em nenhum meetup.</WarnText>
+          <WarnText>Você não possui inscrições em meetups.</WarnText>
         )}
       </Container>
     </Background>

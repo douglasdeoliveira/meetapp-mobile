@@ -2,6 +2,7 @@ import { UserProfile } from '../user/types';
 
 import {
   AuthActionTypes,
+  REFRESH_TOKEN,
   SIGN_FAILURE,
   SIGN_IN_REQUEST,
   SIGN_IN_SUCCESS,
@@ -49,5 +50,12 @@ export function signFailure(): AuthActionTypes {
 export function signOut(): AuthActionTypes {
   return {
     type: SIGN_OUT,
+  };
+}
+
+export function refreshToken(token: string): AuthActionTypes {
+  return {
+    type: REFRESH_TOKEN,
+    payload: { token },
   };
 }

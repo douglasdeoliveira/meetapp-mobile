@@ -1,6 +1,6 @@
-# Desafio 10. Mobile do Meetapp
+# Mobile
 
-Nesse desafio você irá construir o app mobile com React Native do Meetapp que utilizará a API que você desenvolveu durante os desafios do segundo e terceiro módulo de Node.js.
+Nesse desafio você irá construir o app mobile com React Native do Meetapp que utilizará a API que você desenvolveu anteriormente.
 
 Crie uma aplicação do zero utilizando React Native CLI e configure as ferramentas de padrões de código, Reactotron, Redux e Redux Saga.
 
@@ -8,7 +8,22 @@ Essa aplicação será utilizada por inscritos de meetups e não contará com fu
 
 Essa aplicação faz parte do desafio final do bootcamp utilizado para finalização e certificação.
 
-O layout do projeto está anexado nesse repositório dentro da pasta layout.
+O layout do projeto está anexado nesse repositório.
+
+## Scripts de execução
+
+Instalando as dependências:
+
+```
+yarn install
+```
+
+Para Android:
+
+```
+yarn start
+react-native run-android
+```
 
 ## Telas
 
@@ -39,3 +54,7 @@ Nessa tela o usuário pode cancelar uma inscrição.
 O usuário deve poder editar suas informações de cadastro.
 
 Utilize validação nos campos.
+
+## TODO
+
+- Desenvolver e implementar testes

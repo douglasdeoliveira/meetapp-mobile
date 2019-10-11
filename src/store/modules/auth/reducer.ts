@@ -3,6 +3,7 @@ import produce from 'immer';
 import {
   AuthActionTypes,
   AuthState,
+  REFRESH_TOKEN,
   SIGN_FAILURE,
   SIGN_IN_REQUEST,
   SIGN_IN_SUCCESS,
@@ -32,6 +33,11 @@ export default function auth(state = INITIAL_STATE, action: AuthActionTypes) {
 
       case SIGN_FAILURE: {
         draft.loading = false;
+        break;
+      }
+
+      case REFRESH_TOKEN: {
+        draft.token = action.payload.token;
         break;
       }
 

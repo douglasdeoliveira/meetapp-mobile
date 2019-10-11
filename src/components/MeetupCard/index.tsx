@@ -25,7 +25,6 @@ export default function MeetupCard({ meetup, children }: CardContent) {
     NavigationService.navigate('MeetupDetail', {
       meetup,
       dateParsed,
-      children,
     });
   }
 

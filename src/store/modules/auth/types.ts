@@ -27,6 +27,7 @@ export const SIGN_IN_SUCCESS = '@auth/SIGN_IN_SUCCESS';
 export const SIGN_UP_REQUEST = '@auth/SIGN_UP_REQUEST';
 export const SIGN_FAILURE = '@auth/SIGN_FAILURE';
 export const SIGN_OUT = '@auth/SIGN_OUT';
+export const REFRESH_TOKEN = '@auth/REFRESH_TOKEN';
 export const REHYDRATE = 'persist/REHYDRATE';
 
 /*
@@ -62,6 +63,13 @@ interface SignOutAction {
   type: typeof SIGN_OUT;
 }
 
+export interface RefreshTokenAction {
+  type: typeof REFRESH_TOKEN;
+  payload: {
+    token: string;
+  };
+}
+
 export interface RehydrateAction {
   type: typeof REHYDRATE;
   payload: ApplicationState;
@@ -72,4 +80,5 @@ export type AuthActionTypes =
   | SignInSuccessAction
   | SignUpRequestAction
   | SignFailureAction
-  | SignOutAction;
+  | SignOutAction
+  | RefreshTokenAction;

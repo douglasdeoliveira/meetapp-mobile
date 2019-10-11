@@ -12,7 +12,6 @@ export default function MeetupDetail({
 }: NavigationStackScreenProps) {
   const meetup: Meetup = navigation.getParam('meetup');
   const dateParsed: Date = navigation.getParam('dateParsed');
-  const children: any = navigation.getParam('children');
 
   return (
     <Background>
@@ -33,8 +32,6 @@ export default function MeetupDetail({
             <Icon name="person" size={20} color="#999" />
             <InfoText>{meetup.user.name}</InfoText>
           </InfoItem>
-
-          {children}
         </MeetupContent>
       </Container>
     </Background>
