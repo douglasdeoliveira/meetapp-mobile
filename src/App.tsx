@@ -8,8 +8,9 @@ import { ApplicationState } from './store';
 
 export default function App() {
   YellowBox.ignoreWarnings(['Warning: componentWillMount is deprecated']);
-  const signed = useSelector((state: ApplicationState) => state.auth.signed);
+  YellowBox.ignoreWarnings(['`-[RCTRootView cancelTouches]`']);
 
+  const signed = useSelector((state: ApplicationState) => state.auth.signed);
   const Routes = createRouter(signed);
 
   return (

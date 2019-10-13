@@ -1,11 +1,11 @@
-import { FlatList } from 'react-native';
+import { FlatList, Platform } from 'react-native';
 import styled from 'styled-components/native';
 
 import Button from '~/components/Button';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
-  margin-top: 65px;
+  margin-top: ${Platform.OS === 'ios' ? '90px' : '65px'};
 `;
 
 export const List = styled(FlatList).attrs({

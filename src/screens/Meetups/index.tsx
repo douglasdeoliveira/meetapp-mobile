@@ -48,8 +48,7 @@ export default function Meetups() {
       setMeetups(meetups.filter(m => m.id !== id));
 
       showMessage({
-        message: 'Parabéns!',
-        description: 'Inscrição realizada com sucesso',
+        message: 'Inscrição realizada com sucesso',
         type: 'success',
       });
     } catch (error) {

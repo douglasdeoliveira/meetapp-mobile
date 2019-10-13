@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 
 import Button from '~/components/Button';
@@ -5,7 +6,7 @@ import Input from '~/components/Input';
 
 export const Container = styled.SafeAreaView`
   flex: 1;
-  margin-top: 65px;
+  margin-top: ${Platform.OS === 'ios' ? '90px' : '65px'};
 `;
 
 export const Form = styled.ScrollView.attrs({

@@ -46,10 +46,10 @@ export default (isSigned = false) =>
               headerTransparent: true,
               headerTintColor: '#fff',
               headerTitle: () => <Header />,
-              headerLeftContainerStyle: {
-                height: 60,
+              headerStyle: {
                 backgroundColor: 'rgba(0,0,0,0.3)',
               },
+              headerBackTitle: null,
             }),
           },
         ),

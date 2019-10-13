@@ -25,6 +25,13 @@ yarn start
 react-native run-android
 ```
 
+Para iOS (somente macOS):
+
+```
+yarn start
+react-native run-ios
+```
+
 ## Telas
 
 ### Autenticação

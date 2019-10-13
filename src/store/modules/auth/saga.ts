@@ -30,8 +30,7 @@ export function* signIn({ payload }: SignInRequestAction) {
     yield put(signInSuccess(token, user));
   } catch (error) {
     showMessage({
-      message: 'Falha na autenticação',
-      description: 'Houve um erro no login, verifique seus dados',
+      message: 'Houve um erro no login, verifique seus dados',
       type: 'danger',
     });
     yield put(signFailure());
@@ -45,16 +44,14 @@ export function* signUp({ payload }: SignUpRequestAction) {
     yield call(api.post, 'users', { name, email, password });
 
     showMessage({
-      message: 'Parabéns!',
-      description: 'Usuário cadastrado com sucesso',
+      message: 'Usuário cadastrado com sucesso',
       type: 'success',
     });
 
     NavigationService.navigate('SignIn');
   } catch (error) {
     showMessage({
-      message: 'Falha no cadastro',
-      description: 'Houve um erro no cadastro',
+      message: 'Houve um erro no cadastro',
       type: 'danger',
     });
     yield put(signFailure());

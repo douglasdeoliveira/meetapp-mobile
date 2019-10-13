@@ -1,8 +1,9 @@
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 
 export const Container = styled.ScrollView`
   flex: 1;
-  margin-top: 65px;
+  margin-top: ${Platform.OS === 'ios' ? '90px' : '57px'};
 `;
 
 export const MeetupImage = styled.Image.attrs({

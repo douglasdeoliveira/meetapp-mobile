@@ -7,13 +7,12 @@ export const Container = styled.View`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 20px;
+  padding: 20px 0;
 `;
 
 export const Logo = styled.Image.attrs({
   source: logo,
 })`
-  width: 23px;
+  width: 24px;
   height: 24px;
 `;
